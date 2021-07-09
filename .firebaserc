@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "game-night-organizer-8479a": {
+      "hosting": {
+        "firestarter-demo": [
+          "game-night-organizer-8479a"
+        ]
+      }
+    }
+  }
+}
