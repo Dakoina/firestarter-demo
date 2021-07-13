@@ -12,9 +12,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DeleteButtonComponent } from './delete-button/delete-button.component';
+import { MatDatepicker, MatDatepickerToggle } from "@angular/material/datepicker"
 
 const components = [ShellComponent, DeleteButtonComponent];
 
@@ -32,6 +33,9 @@ const modules = [
   MatFormFieldModule,
   MatInputModule,
   MatSnackBarModule,
+  MatDatepicker,
+  MatDatepickerToggle,
+  MatInput,
   RouterModule
 ];
 

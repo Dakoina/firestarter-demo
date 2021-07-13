@@ -8,6 +8,9 @@ const routes: Routes = [
     path: "", component: HomePageComponent,
   },
   {
+    path: "agenda", loadChildren: () => import("./agenda/agenda.module").then(m=>m.AgendaModule), canActivate: [AuthGuard]
+  },
+  {
     path: 'login', loadChildren: () => import('./user/user.module').then(m => m.UserModule)
   },
   {
