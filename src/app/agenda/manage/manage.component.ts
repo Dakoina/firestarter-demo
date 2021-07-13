@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { SharedModule } from 'src/app/shared/shared.module';
+import {Component, OnInit} from '@angular/core';
+import {SharedModule} from 'src/app/shared/shared.module';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-manage',
@@ -8,7 +9,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 })
 export class ManageComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

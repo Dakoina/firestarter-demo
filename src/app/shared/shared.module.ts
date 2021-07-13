@@ -12,9 +12,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DeleteButtonComponent } from './delete-button/delete-button.component';
+import {MatNativeDateModule} from "@angular/material/core";
 
 const components = [ShellComponent, DeleteButtonComponent];
 
@@ -30,14 +30,16 @@ const modules = [
   MatIconModule,
   MatCardModule,
   MatFormFieldModule,
-  MatInputModule,
   MatSnackBarModule,
+  MatNativeDateModule,
+  // MatMomentDateModule,
   RouterModule
 ];
 
 @NgModule({
   declarations: [
-    ...components
+    ...components,
+    DeleteButtonComponent
   ],
   imports: [
     ...modules
