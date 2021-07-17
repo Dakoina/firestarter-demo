@@ -1,0 +1,24 @@
+.outer-card {
+  margin: 10px;
+  min-width: 300px;
+  max-width: 300px;
+  padding: 10px;
+  // background: #c0c0c0;
+}
+
+.inner-card {
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.cdk-drag-animating {
+  transition: transform 300ms ease;
+}
+
+.games.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 300ms ease;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.5;
+}

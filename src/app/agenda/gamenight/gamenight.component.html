@@ -1,3 +1,16 @@
 <p>gamenight works!</p>
-<p>{{id}}</p>
+<p>Gamenight id: {{id}}</p>
 
+
+<mat-grid-list cols="3">
+  <mat-grid-tile>
+    <app-shared-games-list (addedGame)="addGameToSelection($event)" [games]="gamesList"></app-shared-games-list>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <app-my-selected-games-list [games]="myGamesList"></app-my-selected-games-list>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    all collection
+  </mat-grid-tile>
+
+</mat-grid-list>

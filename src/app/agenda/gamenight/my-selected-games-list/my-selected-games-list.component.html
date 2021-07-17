@@ -1,0 +1,53 @@
+<mat-card>
+  <mat-card-header>
+    <!-- Slot for the handle -->
+    <ng-content></ng-content>
+    <mat-card-title>My selection of games</mat-card-title>
+    <mat-card-subtitle>You can order your games by drag and drop. To games receive more weight.</mat-card-subtitle>
+  </mat-card-header>
+
+
+  <!--  <mat-card-content>-->
+  <!--    <mat-list class="mat-selection-list">-->
+  <!--      <mat-list-item *ngFor="let game of games">-->
+  <!--        <img matListAvatar src="{{game.imageThumbSquareFit}}" alt="image for {{game.name}}">-->
+  <!--        <strong mat-line>{{game.name}}</strong>-->
+  <!--        <div mat-line>Player count: {{game.recommendedMinPlayers}} - {{game.recommendedMaxPlayers}} |-->
+  <!--          Score: {{game.statsAverage}} </div>-->
+  <!--      </mat-list-item>-->
+  <!--    </mat-list>-->
+  <!--  </mat-card-content>-->
+
+  <div
+    class="games"
+    cdkDropList
+    #mySelection="cdkDropList"
+    [cdkDropListConnectedTo]="deleteList"
+    cdkDropListOrientation="vertical"
+    (cdkDropListDropped)="gameDrop($event)"
+  >
+    <div
+      class="inner-card"
+      cdkDrag
+      *ngFor="let game of games; let i = index"
+    >
+      <mat-card>
+        <mat-card-title>{{ game.name }}</mat-card-title>
+        <mat-card-subtitle>Player count: {{game.recommendedMinPlayers}} - {{game.recommendedMaxPlayers}} |
+          Score: {{game.statsAverage}}</mat-card-subtitle>
+        <button mat-flat-button (click)="removeGame(game)"></button>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="games"
+       cdkDropList
+       #deleteList="cdkDropList"
+       style="border: #71deff dashed 2px; height: 100px;"
+       cdkDropListOrientation="vertical"
+       (cdkDropListDropped)="removeDroppedGame($event)">
+    <!-- Slot for the handle -->
+    <ng-content></ng-content>
+  </div>
+
+</mat-card>

@@ -1,9 +1,18 @@
 export interface Game {
   id?: string;
   name?: string;
-  thumbnail?: string;
+  description?: string;
   minPlayers?: number;
   maxPlayers?: number;
+  yearPublished?: string;
+  imageThumbSquare?: string;
+  imageThumbSquareFit?: string;
+  bestMinPlayers?: string;
+  bestMaxPlayers?: string;
+  recommendedMinPlayers?: string;
+  recommendedMaxPlayers?: string;
+  statsAverage?: number;
+
 }
 
 export interface GameNight {

@@ -1,0 +1,16 @@
+<mat-card >
+  <mat-card-header>
+    <mat-card-title>Shared board games list</mat-card-title>
+    <mat-card-subtitle>Click on a game to add to your play-wishlist</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-action-list class="mat-selection-list">
+      <button mat-list-item *ngFor="let game of games" (click)="addGame(game)">
+        <img matListAvatar src="{{game.imageThumbSquareFit}}" alt="image for {{game.name}}">
+        <strong mat-line>{{game.name}}</strong>
+        <div mat-line>Player count: {{game.recommendedMinPlayers}} - {{game.recommendedMaxPlayers}} |
+          Score: {{game.statsAverage}} </div>
+      </button>
+    </mat-action-list>
+  </mat-card-content>
+</mat-card>
