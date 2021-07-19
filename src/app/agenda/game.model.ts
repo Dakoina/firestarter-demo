@@ -1,3 +1,6 @@
+import firebase from "firebase";
+import Timestamp = firebase.firestore.Timestamp;
+
 export interface Game {
   id?: string;
   name?: string;
@@ -12,18 +15,20 @@ export interface Game {
   recommendedMinPlayers?: string;
   recommendedMaxPlayers?: string;
   statsAverage?: number;
+}
 
+export interface GameSelection {
+  id?: string;
+  gameid?: string;
+  gamenightid?: string;
+  gameweight?: number;
+  name?: string;
+  uid?: string;
 }
 
 export interface GameNight {
   id?: string;
-  date?: string;
-  invitees?: Invitee[];
-
+  date?: Date;
+  description?: string;
 }
 
-export interface Invitee {
-  id?: string;
-  name: string;
-  status?: "aanwezig" | "afwezig" | "nog geen reactie" | "twijfel";
-}

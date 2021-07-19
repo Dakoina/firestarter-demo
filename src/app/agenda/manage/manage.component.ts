@@ -1,18 +1,32 @@
-import {Component, OnInit} from '@angular/core';
-import {SharedModule} from 'src/app/shared/shared.module';
-import {ActivatedRoute} from "@angular/router";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {GamenightService} from "../gamenight.service";
+import {GameNight} from "../game.model";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-manage',
   templateUrl: './manage.component.html',
   styleUrls: ['./manage.component.scss']
 })
-export class ManageComponent implements OnInit {
+export class ManageComponent implements OnInit, OnDestroy {
 
-  constructor() {
+  gameNights: GameNight[] = [];
+
+  sub: Subscription = new Subscription();
+
+  constructor(private gameNightService : GamenightService) {
   }
 
   ngOnInit(): void {
+    this.sub = this.gameNightService
+      .getAllGameNights()
+      .subscribe(gameNights => {
+        console.log("game nights:", gameNights)
+        this.gameNights = gameNights;
+      });
   }
 
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

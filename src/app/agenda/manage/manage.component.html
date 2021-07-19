@@ -1,4 +1,5 @@
-<p>manage works!</p>
+<h2>Management page</h2>
+<h4>Creëer en bekijk het overzicht van de game nights</h4>
 
 <mat-form-field appearance="fill">
   <mat-label>Pick a date</mat-label>
@@ -8,8 +9,9 @@
 </mat-form-field>
 
 
-
-  <ul>
-    <li><a [routerLink]="['gamenight', 'id1234789']">Account 1</a></li>
-  </ul>
+<ul>
+  <li *ngFor="let night of this.gameNights">
+    <a [routerLink]="['gamenight', night.id]">{{night.date}}</a>
+  </li>
+</ul>
 

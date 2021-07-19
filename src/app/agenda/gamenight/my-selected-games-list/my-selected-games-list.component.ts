@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Game} from "../../game.model";
+import {Component, Input, EventEmitter, OnInit, Output} from '@angular/core';
+import {Game, GameSelection} from "../../game.model";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {GamenightService} from "../../gamenight.service";
 
@@ -11,30 +11,27 @@ import {GamenightService} from "../../gamenight.service";
 export class MySelectedGamesListComponent {
 
   @Input() gameNightId: string ="";
-  @Input() games: Game[] = []
+  @Input() games: GameSelection[] = []
+
+  @Output() orderChanged: EventEmitter<string> = new EventEmitter<string>();
+  @Output() removeGame: EventEmitter<GameSelection> = new EventEmitter<GameSelection>();
 
   constructor(private gameNightService : GamenightService) { }
 
-  gameDrop(event: CdkDragDrop<Game>) {
+  gameDrop(event: CdkDragDrop<GameSelection>) {
     console.log(event)
     if (event.previousContainer === event.container) {
       moveItemInArray(this.games, event.previousIndex, event.currentIndex);
+      // emit event that the order has changed
+      this.orderChanged.emit("order changed");
     } else {
-      console.log("not currnt container")
+      console.log("moving between containers")
     }
-    // update to firestore server
-    // this.gameNightService.updateMySelection(this.gameNightId, this.games);
+
 
   }
 
-  removeDroppedGame(event: CdkDragDrop<Game>){
-    console.log(event)
-
-  }
-  removeGame(game: Game) {
-    const idx = this.games.indexOf(game);
-    if (idx > -1){
-      this.games.splice(idx,1)
-    }
+  removeGameFromList(game: GameSelection) {
+    this.removeGame.emit(game);
   }
 }

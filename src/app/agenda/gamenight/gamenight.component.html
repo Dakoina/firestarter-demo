@@ -1,5 +1,5 @@
-<p>gamenight works!</p>
-<p>Gamenight id: {{id}}</p>
+<h2>This is the gamenight page</h2>
+<p>Gamenight id: {{gameNightId}} | date here</p>
 
 
 <mat-grid-list cols="3">
@@ -7,7 +7,7 @@
     <app-shared-games-list (addedGame)="addGameToSelection($event)" [games]="gamesList"></app-shared-games-list>
   </mat-grid-tile>
   <mat-grid-tile>
-    <app-my-selected-games-list [games]="myGamesList"></app-my-selected-games-list>
+    <app-my-selected-games-list (orderChanged)="mySelectionOrderChanged($event)" (removeGame)="removeGameFromSelection($event)" [games]="myGamesList"></app-my-selected-games-list>
   </mat-grid-tile>
   <mat-grid-tile>
     all collection
