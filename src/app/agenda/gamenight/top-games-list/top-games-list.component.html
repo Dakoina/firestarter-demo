@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Top wishlisted games</mat-card-title>
+    <mat-card-subtitle>Meest gewilde games bovenaan, volgens gewicht</mat-card-subtitle>
+  </mat-card-header>
+
+  <div cdkDropListGroup>
+    <div
+      class="games"
+      cdkDropList
+    >
+      <div
+        class="inner-card"
+        cdkDrag
+        *ngFor="let game of gameNight?.wishList; let i = index"
+      >
+        <mat-card>
+          <mat-card-title>{{ i }}. {{ game.name }}</mat-card-title>
+        </mat-card>
+      </div>
+    </div>
+
+  </div>
+
+</mat-card>

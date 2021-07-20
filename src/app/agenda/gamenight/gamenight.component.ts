@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {GamenightService} from "../gamenight.service";
-import {Game, GameSelection} from "../game.model";
+import {Game, GameNight, GameSelection} from "../game.model";
 import {Subscription} from "rxjs";
 import firebase from "firebase/app";
 
@@ -15,9 +15,11 @@ export class GamenightComponent implements OnInit, OnDestroy {
   gameNightId: string = "";
   gamesList: Game[] = [];
   myGamesList: GameSelection[] = [];
+  gameNight: GameNight = {};
 
   subGames: Subscription = new Subscription();
   subMySelection: Subscription = new Subscription();
+  subGameNight: Subscription = new Subscription();
 
   constructor(private route: ActivatedRoute, private gameNightService: GamenightService) {
     // set the game night id for the component
@@ -28,20 +30,31 @@ export class GamenightComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subGames.unsubscribe();
     this.subMySelection.unsubscribe();
+    this.subGameNight.unsubscribe();
   }
 
 
   ngOnInit(): void {
+    // all games
     this.subGames = this.gameNightService
       .getAllGames()
       .subscribe(games => {
         this.gamesList = games;
       });
+    // my game selection
     this.subMySelection = this.gameNightService
       .getMySelectedGames(this.gameNightId)
       .subscribe(games => {
         // @ts-ignore
         this.myGamesList = games.sort((a, b) => b.gameweight - a.gameweight)
+      });
+    // gamenight
+    this.subGameNight = this.gameNightService
+      .getGameNight(this.gameNightId).subscribe(gameNight => {
+        // @ts-ignore
+        this.gameNight = gameNight;
+        // @ts-ignore
+        this.gameNight?.wishList.sort((a,b) => b.score - a.score)
       });
   }
 
@@ -73,18 +86,19 @@ export class GamenightComponent implements OnInit, OnDestroy {
     const user = firebase.auth().currentUser;
 
     // but convert game to gameselection obj
+    const weights = [5, 3, 2, 1, 0];
     let selectedGame: GameSelection = {
       gameid: game.id,
       gamenightid: this.gameNightId,
       uid: user?.uid,
-      gameweight: 5,
+      gameweight: weights[this.myGamesList.length],
       name: game.name
     }
     this.myGamesList.push(selectedGame);
 
     // reset weights
-    this.updateWeights()
-    this.gameNightService.updateSelectedGames(this.myGamesList);
+    // this.updateWeights()
+    this.gameNightService.addSelectedGame(selectedGame);
   }
 
   /**

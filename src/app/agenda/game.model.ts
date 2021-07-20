@@ -17,6 +17,10 @@ export interface Game {
   statsAverage?: number;
 }
 
+export interface WishedGame{
+  name?: string;
+  score?: number;
+}
 export interface GameSelection {
   id?: string;
   gameid?: string;
@@ -30,5 +34,6 @@ export interface GameNight {
   id?: string;
   date?: Date;
   description?: string;
+  wishList?: WishedGame[];
 }
 

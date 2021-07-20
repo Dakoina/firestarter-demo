@@ -93,7 +93,26 @@ export class GamenightService {
   }
 
   /**
-   * Update all the selected games on the server
+   * Add a new game to the list and update the wishlist scores
+   * @param selectedGame
+   */
+  addSelectedGame(selectedGame: GameSelection){
+    console.log("Adding game to selection ", selectedGame)
+    // const ratingRef =
+    this.db.collection<GameSelection>("gameselections").doc(this.generateGameSelectionDoc(selectedGame)).set(
+      {
+        gameid: selectedGame.gameid,
+        gamenightid: selectedGame.gamenightid,
+        gameweight: selectedGame.gameweight,
+        name: selectedGame.name,
+        uid: selectedGame.uid
+      }
+    );
+  }
+
+  /**
+   * Update/add all the selected games on the server
+   * - plus, update wishlist scores
    * @param myGamesList
    */
   updateSelectedGames(myGamesList: GameSelection[]) {
@@ -127,5 +146,20 @@ export class GamenightService {
       .then((result) => {
         console.log("commit done", result);
       }).catch(error => console.log("error on commit", error));
+  }
+
+  getGameNight(gameNightId: string) {
+    return this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.db
+            .collection<GameNight>("gamenights", ref =>
+              ref.where("gamenightid", "==", gameNightId))
+            .valueChanges({idField: 'id'})
+        } else {
+          return [];
+        }
+      })
+    );
   }
 }

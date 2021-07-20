@@ -2,15 +2,16 @@
 <p>Gamenight id: {{gameNightId}} | date here</p>
 
 
-<mat-grid-list cols="3">
+<mat-grid-list cols="3" rowHeight="750px" class="outer">
   <mat-grid-tile>
+    <mat-grid-tile-header>Grid title</mat-grid-tile-header>
     <app-shared-games-list (addedGame)="addGameToSelection($event)" [games]="gamesList"></app-shared-games-list>
   </mat-grid-tile>
   <mat-grid-tile>
     <app-my-selected-games-list (orderChanged)="mySelectionOrderChanged($event)" (removeGame)="removeGameFromSelection($event)" [games]="myGamesList"></app-my-selected-games-list>
   </mat-grid-tile>
   <mat-grid-tile>
-    all collection
+    <app-top-games-list [gameNight]="this.gameNight"></app-top-games-list>
   </mat-grid-tile>
 
 </mat-grid-list>

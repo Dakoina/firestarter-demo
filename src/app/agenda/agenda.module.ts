@@ -11,6 +11,7 @@ import { GamenightComponent } from './gamenight/gamenight.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import { SharedGamesListComponent } from './gamenight/shared-games-list/shared-games-list.component';
 import { MySelectedGamesListComponent } from './gamenight/my-selected-games-list/my-selected-games-list.component';
+import { TopGamesListComponent } from './gamenight/top-games-list/top-games-list.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { MySelectedGamesListComponent } from './gamenight/my-selected-games-list
     ManageComponent,
     GamenightComponent,
     SharedGamesListComponent,
-    MySelectedGamesListComponent
+    MySelectedGamesListComponent,
+    TopGamesListComponent
   ],
   imports: [
     CommonModule,
